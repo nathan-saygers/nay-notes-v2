@@ -5,30 +5,28 @@ class NoteForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      newNote: {
-        id: Date.now,
         title: '',
         body: '',
-        type: ''
-      }
+        type: 'Work'
     }
   }
 
   handleChange = event => {
-    this.setState({newNote: event.target.value})
-    console.log(
-      'NewNote Title:', this.state.newNote.title,
-      'NewNote Body:', this.state.newNote.body,
-      'NewNote Tag', this.state.newNote.type,
-      )
+    this.setState({[event.target.name]: event.target.value})
+    console.log('state from insde handleChange', this.state)
+  }
+
+  handleDropDownChange = event => {
+    this.setState({type: event.target.value})
+    console.log('this fired')
   }
 
   render() {
     return(
       <form action="">
-        <input type="text" value={this.state.newNote.title} onChange={this.handleChange}/>
-        <input type="text" value={this.state.newNote.body} onChange={this.handleChange}/>
-        <select>
+        <input type="text" name='title' value={this.state.title} onChange={this.handleChange}/>
+        <input type="text" name='body' value={this.state.body} onChange={this.handleChange}/>
+        <select value={this.state.value} onChange={this.handleDropDownChange}>
           <option value="Work">Work</option>
           <option value="Fun">Fun</option>
           <option value="Misc">Misc.</option>
